@@ -1,0 +1,9 @@
+-- b
+
+  prodocts_orders (one to many)=
+              - products
+              - orders
+category (one to one)=
+              -products
+products (one to one)=
+              -nutritions
