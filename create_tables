@@ -1,0 +1,42 @@
+-- sql prep work
+--a -create tables
+
+CREATE TABLE nutritions (
+nutrition_id INT PRIMARY KEY not null,
+product_id INT NOT NULL,
+name TEXT not NULL,
+calories int not null,
+fats REAL not null,
+sugar INT not NULL);
+
+CREATE table products (
+product_id  INT PRIMARY KEY,
+name text not NULL,
+price INT NOT NULL DEFAULT 0,
+category_id INT not NULL,
+FOREIGN KEY (product_id) REFERENCES nutrirtions(product_id)
+on UPDATE CASCADE);
+
+CREATE TABLE category (
+category_id int PRIMARY KEY,
+name text not NULL,
+FOREIGN KEY (category_id) REFERENCES products(category_id)
+on DELETE CASCADE on UPDATE CASCADE);
+
+CREATE TABLE orders (
+order_id INT PRIMARY KEY,
+date_time INT NOT NULL,
+address text NOT NULL,
+costumer_name char(40) NOT NULL,
+costumer_ph char(40) NOT NULL,
+total_price INT NOT NULL DEFAULT 0);
+
+ CREATE TABLE product_orders (
+ order_id INT not NULL,
+ product_id INT NOT NULL,
+ amount INT DEFAULT 0,
+ PRIMARY KEY (order_id,product_id)
+ FOREIGN KEY (order_id) REFERENCES orders(order_id)
+ on DELETE CASCADE on UPDATE CASCADE
+ FOREIGN KEY (product_id) REFERENCES products(product_id)
+ on DELETE CASCADE on UPDATE CASCADE);
